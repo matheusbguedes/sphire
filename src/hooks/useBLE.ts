@@ -72,7 +72,7 @@ export function useBLE() {
 
     const scanOptions = {
       allowDuplicates: false,
-      scanMode: 2,
+      scanMode: 1,
       timeout: 10000, // 10 seconds
     };
 

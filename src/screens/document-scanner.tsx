@@ -1,4 +1,6 @@
+import { AppNavigatorRoutesProps } from "@/routes/app.routes";
 import { storageDeviceGet } from "@/storage/storageDevice";
+import { useNavigation } from "@react-navigation/native";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import { Flashlight, FlashlightOff } from "lucide-react-native";
 import { useEffect, useState } from "react";
@@ -9,8 +11,10 @@ export function DocumentScanner() {
   const [permission, requestPermission] = useCameraPermissions();
   const [isTorchOn, setIsTorchOn] = useState(false);
 
+  const navigation = useNavigation<AppNavigatorRoutesProps>();
+
   function handleBarcodeScanned({ data }: { data: string }) {
-    console.log(data);
+    navigation.navigate("scannedProfile");
   }
 
   useEffect(() => {

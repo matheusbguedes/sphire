@@ -35,7 +35,6 @@
     },
     "plugins": [
       "expo-dev-client",
-      "expo-router",
       [
         "react-native-ble-plx",
         {
