@@ -1,3 +1,4 @@
+import { Docs } from "@/@types/docs";
 import { Button } from "@/components/button";
 import { Field } from "@/components/field";
 import { AppNavigatorRoutesProps } from "@/routes/app.routes";
@@ -10,7 +11,7 @@ import { Image, TouchableOpacity, View } from "react-native";
 import { faker } from "@faker-js/faker/locale/pt_BR";
 
 export function ScannedProfile() {
-  const [document, setDocument] = useState<any>();
+  const [document, setDocument] = useState<Docs>();
 
   const navigation = useNavigation<AppNavigatorRoutesProps>();
 
@@ -43,6 +44,8 @@ export function ScannedProfile() {
   useEffect(() => {
     handleGetDocument();
   }, []);
+
+  if (!document) return null;
 
   return (
     <View className="flex-1 bg-white">
