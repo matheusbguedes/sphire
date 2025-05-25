@@ -1,5 +1,6 @@
 import { BluetoothConnection } from "@/screens/bluetooth-connection";
 import { DocumentScanner } from "@/screens/document-scanner";
+import { MeasuringScreen } from "@/screens/measuring-screen";
 import { ScannedProfile } from "@/screens/scanned-profile";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -12,6 +13,7 @@ type AppRoutesType = {
   bluetoothConnection: undefined;
   documentScanner: undefined;
   scannedProfile: undefined;
+  measuringScreen: undefined;
 };
 
 export type AppNavigatorRoutesProps = StackNavigationProp<AppRoutesType>;
@@ -22,7 +24,7 @@ export function AppRoutes() {
   const navigation = useNavigation<AppNavigatorRoutesProps>();
 
   useEffect(() => {
-    // navigation.navigate(""); // go to whatever screen you want
+     navigation.navigate({ name: "measuringScreen", params: undefined }); // go to whatever screen you want
   }, []);
 
   return (
@@ -30,6 +32,8 @@ export function AppRoutes() {
       <Screen name="bluetoothConnection" component={BluetoothConnection} />
       <Screen name="documentScanner" component={DocumentScanner} />
       <Screen name="scannedProfile" component={ScannedProfile} />
+      <Screen name="measuringScreen" component={MeasuringScreen} />
+
     </Navigator>
   );
 }
