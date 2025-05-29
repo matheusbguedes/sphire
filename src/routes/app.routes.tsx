@@ -24,7 +24,7 @@ export function AppRoutes() {
   const navigation = useNavigation<AppNavigatorRoutesProps>();
 
   useEffect(() => {
-    //  navigation.navigate(""); // go to whatever screen you want
+    navigation.navigate("alchoholMeasurement"); // go to whatever screen you want
   }, []);
 
   return (
