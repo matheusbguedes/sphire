@@ -1,7 +1,7 @@
 import { AlcoholMeasurement } from "@/screens/alchohol-measurement";
 import { BluetoothConnection } from "@/screens/bluetooth-connection";
 import { DocumentScanner } from "@/screens/document-scanner";
-import { MeasurementResultScreen } from "@/screens/measurement-result";
+import { MeasurementResult } from "@/screens/measurement-result";
 import { ScannedProfile } from "@/screens/scanned-profile";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -15,7 +15,7 @@ type AppRoutesType = {
   documentScanner: undefined;
   scannedProfile: undefined;
   alchoholMeasurement: undefined;
-  measurementResultScreen: undefined;
+  measurementResult: undefined;
 };
 
 export type AppNavigatorRoutesProps = StackNavigationProp<AppRoutesType>;
@@ -26,7 +26,7 @@ export function AppRoutes() {
   const navigation = useNavigation<AppNavigatorRoutesProps>();
 
   useEffect(() => {
-    navigation.navigate("measurementResultScreen");
+    navigation.navigate("measurementResult");
   }, []);
 
   return (
@@ -35,7 +35,7 @@ export function AppRoutes() {
       <Screen name="documentScanner" component={DocumentScanner} />
       <Screen name="scannedProfile" component={ScannedProfile} />
       <Screen name="alchoholMeasurement" component={AlcoholMeasurement} />
-      <Screen name="measurementResultScreen" component={MeasurementResultScreen} />
+      <Screen name="measurementResult" component={MeasurementResult} />
     </Navigator>
   );
 }
