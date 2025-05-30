@@ -15,7 +15,7 @@ export function Button({ title, isLoading = false, ...rest }: Props) {
   return (
     <TouchableOpacity
       activeOpacity={0.8}
-      className="w-full flex items-center justify-center bg-black disabled:opacity-80 rounded-full p-4"
+      className="w-full flex items-center justify-center bg-zinc-800 disabled:opacity-80 rounded-full p-4"
       {...rest}
     >
       {isLoading ? (

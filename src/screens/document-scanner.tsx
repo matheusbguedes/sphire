@@ -20,9 +20,7 @@ export function DocumentScanner() {
   useEffect(() => {
     storageDeviceGet().then((device) => setDevice(device));
 
-    if (!permission?.granted) {
-      requestPermission();
-    }
+    if (!permission?.granted) requestPermission();
   }, []);
 
   if (!permission) return null;
