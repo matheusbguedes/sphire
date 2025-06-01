@@ -32,7 +32,7 @@ export function BluetoothConnection() {
   const handleConnectDevice = async (device: Device) => {
     const success = await connectToDevice(device);
     if (success) {
-      navigation.navigate("documentScanner");
+      navigation.navigate("alchoholMeasurement");
     }
   };
 
