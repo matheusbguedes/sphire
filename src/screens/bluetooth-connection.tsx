@@ -1,17 +1,40 @@
 import { Button } from "@/components/button";
 import { Separator } from "@/components/separator";
 import { useBLE } from "@/hooks/useBLE";
+import { AppNavigatorRoutesProps } from "@/routes/app.routes";
+import { useNavigation } from "@react-navigation/native";
 import { Bluetooth } from "lucide-react-native";
 import { useEffect } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import {
+  ActivityIndicator,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { Device } from "react-native-ble-plx";
 
 export function BluetoothConnection() {
-  const { devices, isScanning, isConnecting, scanForDevices, connectToDevice } =
-    useBLE();
+  const {
+    devices,
+    isScanning,
+    isConnecting,
+    connectingDeviceId,
+    scanForDevices,
+    connectToDevice,
+  } = useBLE();
 
   useEffect(() => {
     scanForDevices();
   }, []);
+
+  const navigation = useNavigation<AppNavigatorRoutesProps>();
+  const handleConnectDevice = async (device: Device) => {
+    const success = await connectToDevice(device);
+    if (success) {
+      navigation.navigate("documentScanner");
+    }
+  };
 
   return (
     <View className="flex-1 gap-4 bg-white">
@@ -23,24 +46,28 @@ export function BluetoothConnection() {
       <View className="flex-1 gap-3 px-8">
         <Text className="font-medium text-zinc-400">Dispositivos</Text>
         <Separator />
-        <View className="flex-1 overflow-y-auto gap-8 mt-4">
-          {devices.map((device) => {
-            return (
-              <TouchableOpacity
-                key={device.id}
-                disabled={isConnecting}
-                onPress={() => connectToDevice(device)}
-                className="flex-row justify-between items-center"
-              >
-                <Text className="text-base">
-                  {device.name || "Dispositivo sem nome"}
-                </Text>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
+        <ScrollView className="flex-1 py-3" showsVerticalScrollIndicator={true}>
+          <View className="gap-8">
+            {devices.map((device) => {
+              const isCurrentlyConnecting = connectingDeviceId === device.id;
+              return (
+                <TouchableOpacity
+                  key={device.id}
+                  disabled={isConnecting || isCurrentlyConnecting}
+                  onPress={() => handleConnectDevice(device)}
+                  className="flex-row justify-between items-center"
+                >
+                  <Text className="text-base flex-1">{device.name}</Text>
+                  {isCurrentlyConnecting && (
+                    <ActivityIndicator size="small" color="black" />
+                  )}
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+        </ScrollView>
       </View>
-      <View className="px-8">
+      <View className="px-8 pb-4">
         <Button
           title="Buscar"
           isLoading={isScanning}

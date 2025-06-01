@@ -7,7 +7,6 @@ import { ArrowLeft } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { Image, TouchableOpacity, View } from "react-native";
 
-// eslint-disable-next-line import/no-unresolved
 import { faker } from "@faker-js/faker/locale/pt_BR";
 
 export function ScannedProfile() {
@@ -20,8 +19,7 @@ export function ScannedProfile() {
   }
 
   function handleNext() {
-    // navigation.navigate("alchoholMeasurement");
-    console.log("go to alcohol measurement!");
+    navigation.navigate("alchoholMeasurement");
   }
 
   async function handleGetDocument() {

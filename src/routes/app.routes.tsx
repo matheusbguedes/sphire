@@ -15,7 +15,9 @@ type AppRoutesType = {
   documentScanner: undefined;
   scannedProfile: undefined;
   alchoholMeasurement: undefined;
-  measurementResult: undefined;
+  measurementResult: {
+    rawValue: string;
+  };
 };
 
 export type AppNavigatorRoutesProps = StackNavigationProp<AppRoutesType>;
@@ -26,7 +28,7 @@ export function AppRoutes() {
   const navigation = useNavigation<AppNavigatorRoutesProps>();
 
   useEffect(() => {
-    // navigation.navigate("");
+    navigation.navigate("alchoholMeasurement");
   }, []);
 
   return (
